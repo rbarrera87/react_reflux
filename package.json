@@ -1,0 +1,20 @@
+{
+  "name": "reflux-exa",
+  "version": "1.0.0",
+  "description": "Example with Reflux",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify -t babelify app.js > build.js"
+  },
+  "author": "Ricardo Barrera",
+  "license": "MIT",
+  "dependencies": {
+    "babelify": "^6.2.0",
+    "bootstrap": "^3.3.5",
+    "browserify": "^11.0.1",
+    "jquery": "^2.1.4",
+    "react": "^0.13.3",
+    "reflux": "^0.2.12"
+  }
+}
