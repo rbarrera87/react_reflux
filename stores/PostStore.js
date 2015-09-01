@@ -6,6 +6,7 @@ import BuscadorActions from '../actions/BuscadorActions';
 var PostStore = Reflux.createStore({
   listenables: [BuscadorActions],
   postlist: [],
+  postlist_query: [],
   init: function(){
     this.fetchList()
   },
@@ -23,6 +24,20 @@ var PostStore = Reflux.createStore({
         $this.postlist = data.posts;
         $this.trigger($this.postlist);
       });
+  },
+  fetchListWithParams: function (q) {
+    if (q == "" || typeof q == "udefined") {
+      this.trigger(this.postlist);
+    }else{
+      var posts_return = [];
+      for (var i = this.postlist.length - 1; i >= 0; i--) {
+        if(this.postlist[i].title.toLocaleLowerCase().match(q.toLocaleLowerCase())){
+          posts_return.push(this.postlist[i]);
+        }
+      };
+      this.postlist_query = posts_return;
+      this.trigger(this.postlist_query);
+    }
   }
 });
 

@@ -6,7 +6,7 @@ React.render(
   document.getElementById('container')
 );
 
-// React.render(
-//   <Buscador />,
-//   document.getElementById('container-2')
-// );
+React.render(
+  <Buscador />,
+  document.getElementById('container-2')
+);

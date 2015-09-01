@@ -4,8 +4,7 @@ import BuscadorActions from "../actions/BuscadorActions";
 
 var InputBuscar = React.createClass({
   handleUserInput: function(){
-    debugger;
-    BuscadorActions.fetchList(this.refs.inputBuscador.getDOMNode().value);
+    BuscadorActions.fetchListWithParams(this.refs.inputBuscador.getDOMNode().value);
   },
   render: function(){
     return (

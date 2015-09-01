@@ -11,7 +11,7 @@ var _reflux = require('reflux');
 
 var _reflux2 = _interopRequireDefault(_reflux);
 
-var BuscadorActions = _reflux2['default'].createActions(['fetchList']);
+var BuscadorActions = _reflux2['default'].createActions(['fetchList', 'fetchListWithParams']);
 
 exports['default'] = BuscadorActions;
 module.exports = exports['default'];
@@ -31,10 +31,7 @@ var _componentsBuscador2 = _interopRequireDefault(_componentsBuscador);
 
 _react2["default"].render(_react2["default"].createElement(_componentsBuscador2["default"], null), document.getElementById('container'));
 
-// React.render(
-//   <Buscador />,
-//   document.getElementById('container-2')
-// );
+_react2["default"].render(_react2["default"].createElement(_componentsBuscador2["default"], null), document.getElementById('container-2'));
 
 },{"./components/Buscador":3,"react":162}],3:[function(require,module,exports){
 "use strict";
@@ -93,8 +90,7 @@ var InputBuscar = _react2['default'].createClass({
   displayName: 'InputBuscar',
 
   handleUserInput: function handleUserInput() {
-    debugger;
-    _actionsBuscadorActions2['default'].fetchList(this.refs.inputBuscador.getDOMNode().value);
+    _actionsBuscadorActions2['default'].fetchListWithParams(this.refs.inputBuscador.getDOMNode().value);
   },
   render: function render() {
     return _react2['default'].createElement('input', {
@@ -30666,6 +30662,7 @@ var _actionsBuscadorActions2 = _interopRequireDefault(_actionsBuscadorActions);
 var PostStore = _reflux2['default'].createStore({
   listenables: [_actionsBuscadorActions2['default']],
   postlist: [],
+  postlist_query: [],
   init: function init() {
     this.fetchList();
   },
@@ -30682,6 +30679,20 @@ var PostStore = _reflux2['default'].createStore({
       $this.postlist = data.posts;
       $this.trigger($this.postlist);
     });
+  },
+  fetchListWithParams: function fetchListWithParams(q) {
+    if (q == "" || typeof q == "udefined") {
+      this.trigger(this.postlist);
+    } else {
+      var posts_return = [];
+      for (var i = this.postlist.length - 1; i >= 0; i--) {
+        if (this.postlist[i].title.toLocaleLowerCase().match(q.toLocaleLowerCase())) {
+          posts_return.push(this.postlist[i]);
+        }
+      };
+      this.postlist_query = posts_return;
+      this.trigger(this.postlist_query);
+    }
   }
 });
 

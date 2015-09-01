@@ -1,7 +1,8 @@
 import Reflux from 'reflux';
 
 var BuscadorActions = Reflux.createActions([
-  'fetchList'
+  'fetchList',
+  'fetchListWithParams'
 ]);
 
 export default BuscadorActions;
